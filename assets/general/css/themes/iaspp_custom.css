@@ -1,0 +1,34 @@
+.info-box-lower {
+  display: block;
+  min-height: 40px;
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  margin-bottom: 15px;
+}
+
+.info-box-icon-lower {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 2px;
+  display: block;
+  float: left;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  font-size: 40px;
+  line-height: 46px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.info-box-content-lower {
+  padding: 0px 30px;
+  margin-left: 40px;
+}
+.info-box-number-lower {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+}
