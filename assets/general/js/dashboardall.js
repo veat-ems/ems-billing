@@ -147,7 +147,6 @@ $(function () {
   const socket = io("http://localhost:3001");
 
   socket.on("update_data", (data) => {
-    // console.log("Data updated:", data);
     fetchdata();
   });
 

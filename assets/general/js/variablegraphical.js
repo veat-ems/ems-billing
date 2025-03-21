@@ -1628,7 +1628,7 @@ $(function () {
       "echarts",
       "echarts/theme/limitless",
       "echarts/chart/gauge",
-    ], function (ec, limitless) { // Charts setup
+    ], function (ec, limitless) { // Charts setupp
       // Initialize charts
       var gauge_v1 = ec.init(document.getElementById("gauge_v1"), limitless);
       var gauge_v2 = ec.init(document.getElementById("gauge_v2"), limitless);
