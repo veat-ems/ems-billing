@@ -26,7 +26,7 @@ $(function () {
 
           var c = obj.id_meter;
 
-          var val_variable0 = obj.variable0; // active energy	
+          var val_variable0 = obj.variable0; // active energy
           var val_variable1 = obj.variable1; // maximum demand
           var val_variable2 = obj.variable2; // average demand
           var val_variable3 = obj.variable3; // apparent power
