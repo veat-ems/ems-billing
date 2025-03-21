@@ -11,6 +11,8 @@
 
 $(function () {
 
+  alert("dashboardgroup.js");
+
   function padDigits(number, digits) {
     return numberWithCommas(number);
   }
@@ -32,6 +34,7 @@ $(function () {
       type: "post",
       success: function (data) {
         dataku = JSON.parse(data);
+        // console.log(">>>", dataku);
 
         for (var i = 0; i < dataku.length; i++) {
           var obj = dataku[i];
@@ -188,27 +191,25 @@ $(function () {
           }
 
           // # If elemnet id not found in html page (even only 1), all datas will failed/not updated
-          // document.getElementById(id_variable0).innerHTML = numberWithCommas(val_variable0); //  tkh
-          // document.getElementById(id_variable1).innerHTML = numberWithCommas(val_variable1); //  tkh
-          // document.getElementById(id_variable2).innerHTML = numberWithCommas(val_variable2); //  tkh
-          // document.getElementById(id_variable3).innerHTML = numberWithCommas(val_variable3); //  tkh
-          // document.getElementById(id_variable4).innerHTML = numberWithCommas(val_variable4); //  tkh
-          // document.getElementById(id_dt0).innerHTML = val_dt0;
+          document.getElementById(id_variable0).innerHTML = numberWithCommas(val_variable0); //  tkh
+          document.getElementById(id_variable1).innerHTML = numberWithCommas(val_variable1); //  tkh
+          document.getElementById(id_variable2).innerHTML = numberWithCommas(val_variable2); //  tkh
+          document.getElementById(id_variable3).innerHTML = numberWithCommas(val_variable3); //  tkh
+          document.getElementById(id_variable4).innerHTML = numberWithCommas(val_variable4); //  tkh
+          document.getElementById(id_dt0).innerHTML = val_dt0;
           
-          // document.getElementById(id_satuan0).innerHTML = val_satuan0; //    tkh
-          // document.getElementById(id_satuan1).innerHTML = val_satuan1; //    tkh
-          // document.getElementById(id_satuan2).innerHTML = val_satuan2; //    tkh
-          // document.getElementById(id_satuan3).innerHTML = val_satuan3; //    tkh
-          // document.getElementById(id_satuan4).innerHTML = val_satuan4; //    tkh
+          document.getElementById(id_satuan0).innerHTML = val_satuan0; //    tkh
+          document.getElementById(id_satuan1).innerHTML = val_satuan1; //    tkh
+          document.getElementById(id_satuan2).innerHTML = val_satuan2; //    tkh
+          document.getElementById(id_satuan3).innerHTML = val_satuan3; //    tkh
+          document.getElementById(id_satuan4).innerHTML = val_satuan4; //    tkh
 
         }
 
       },
-
-      // complete: function (data) {
-      //   setTimeout(fetchdata, 5000); 
-      // },
-
+      complete: function (data) {
+        setTimeout(fetchdata, 5000); 
+      },
     });
   }
 

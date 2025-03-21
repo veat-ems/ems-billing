@@ -1,21 +1,8 @@
-/* ------------------------------------------------------------------------------
- *
- *  # Echarts - candlestick and other charts
- *
- *  Candlestick and other chart configurations
- *
- *  Version: 1.0
- *  Latest update: August 1, 2015
- *
- * ---------------------------------------------------------------------------- */
-
 $(function () {
-  // alert("alert dashboard js");
+
   function padDigits(number, digits) {
-    //return Array(Math.max(digits - String(number).length + 1, 0)).join(0) + numberWithCommas(number);
     return numberWithCommas(number);
   }
-
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -23,14 +10,6 @@ $(function () {
 
   function fetchdata() {
     var_url = window.location.pathname;
-
-    // var param_metergroupid =
-    //   document.getElementById("param_metergroupid").value;
-
-    /*
-	var_pageno = var_url.substring(var_url.lastIndexOf('index/') + 6);
-  url: "../../dashboardall/datameter/" + var_pageno,
-	*/
 
     var_pageno = var_url.substring(var_url.lastIndexOf("/") + 1);
     if (var_pageno == "index") {
@@ -41,9 +20,7 @@ $(function () {
       url: "../../dashboardall/datameter/" + var_pageno,
       type: "post",
       success: function (data) {
-        // alert(data);
         dataku = JSON.parse(data);
-
         for (var i = 0; i < dataku.length; i++) {
           var obj = dataku[i];
 
@@ -56,8 +33,6 @@ $(function () {
           var val_variable4 = obj.variable4; // reactive
           var val_dt0 = obj.date_time;
 
-
-
           var dt_color = '#f9636b';
 
 					var now = new Date();
@@ -65,11 +40,9 @@ $(function () {
 
 					dt_test.setTime(now.getTime() + (30 * 60 * 1000));
 
-
 					var diffMs = (now - new Date(val_dt0)); // milliseconds between now & dt
 					var diffMins = Math.round(diffMs / 60000); // minutes
 
-					// var dt_str = 'Updated in  '+ diffMins + '  minutes ago..';
           if (diffMins < 60) {
 						dt_color = 'orange';
 					}
@@ -96,13 +69,6 @@ $(function () {
           var id_satuan3 = "id_val_satuan3_" + c;
           var id_satuan4 = "id_val_satuan4_" + c;
 
-          // val_variable0 = 7199999999;
-          // val_variable1 = 7199999999;
-          // val_dt0 = new Date();
-
-          // alert(val_variable0);
-          // alert(number(val_variable0));
-
           if (Math.abs(val_variable0) > 99999999) {
             val_variable0 = val_variable0 / 1000;
             val_satuan0 = "MWh";
@@ -124,8 +90,6 @@ $(function () {
             val_satuan4 = "KW";
           }
 
-          
-          // format 1 decimal jika > 0, kl 0 di ignore
           if (Math.abs(val_variable0) > 0) {
             val_variable0 = val_variable0.toFixed(1);
           }
@@ -142,7 +106,6 @@ $(function () {
             val_variable4 = val_variable4.toFixed(1);
           }
           
-          // star if null / ''
           if (val_variable0 == null) {
             val_variable0 = "*";
           }
@@ -178,11 +141,15 @@ $(function () {
           document.getElementById(id_satuan4).innerHTML = val_satuan4; //    tkh
         }
       },
-      complete: function (data) {
-        setTimeout(fetchdata, 60000);
-      },
+
     });
   }
+  const socket = io("http://localhost:3001");
+
+  socket.on("update_data", (data) => {
+    // console.log("Data updated:", data);
+    fetchdata();
+  });
 
   $(document).ready(function () {
     setTimeout(fetchdata, 1000);

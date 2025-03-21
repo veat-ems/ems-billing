@@ -118,7 +118,7 @@
 
                   <tr>
                     <input style="display:none;" type="text" id="param_metergroupid" name="param_metergroupid" value="<?php echo $metergroupname->metergroupid; ?>" />
-                    <!-- input ini dihapus bikin error jquery --tkh -- Take meter_group id by dashboard_header.js   -->
+                    <!-- input ini dihapus bikin error jquery --tkh -- Take meter_group id by dashboard_header.js   --> 
 
                     <th><?php echo $metergroupname->metergroupid; ?> : <?php echo $metergroupname->metergroupname; ?></th>
                     <th class="col-1">

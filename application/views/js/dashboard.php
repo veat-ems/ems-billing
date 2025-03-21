@@ -1,3 +1,4 @@
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
 
 		<!-- REQUIRED SCRIPTS -->
 		<!-- jQuery -->
@@ -21,7 +22,7 @@
 		<script src="<?php echo base_url(); ?>assets/general/js/main.js"></script>
 		<script src="<?php echo base_url(); ?>assets/general/js/dashboard.js"></script>
 		<!-- load group dasboard data // tkh -->
-		<script src="<?php echo base_url(); ?>assets/general/js/dashboard_header.js"></script>
+		<!-- <script src="<?php echo base_url(); ?>assets/general/js/dashboard_header.js"></script> -->
 
 		<script src="<?php echo base_url(); ?>assets/general/js/alarmpush.js"></script>
 		<script src="<?php echo base_url(); ?>assets/vendor/bootstrap-toggle/bootstrap-toggle.min.js"></script>

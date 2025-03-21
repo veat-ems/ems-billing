@@ -134,12 +134,6 @@ class Model_dashboard extends CI_Model
 
 	function get_data_meter_paging_list($limit, $start, $username = false, $metergroupid = false)
 	{
-		//$query = $this->db->get("data_meter", $limit, $start);
-		//return $query;
-
-
-		// $sql = "select 	id_meter, id, id_serial, id_name, data_meter.metergroupid, metergroupname from data_meter ";
-		
 		$sql = "select 	* from data_meter ";
 		$sql .= "LEFT JOIN metergroups ON metergroups.metergroupid = data_meter.metergroupid ";
 		$sql .= "WHERE data_meter.metergroupid  in ";
@@ -149,13 +143,9 @@ class Model_dashboard extends CI_Model
 			$sql .= "and metergroupid = '" . $metergroupid . "' ";
 		}
 		$sql .= ") ";
-		// $sql .= "order by metergroups.metergroupname, metergroups.metergroupid, data_meter.id asc "; // urutkan group detail by group & id_meter
 		$sql .= "order by data_meter.metergroupid, data_meter.id_meter asc "; // urutkan group detail by group & id_meter
 		$sql .= "limit " . $limit . " offset " . $start . " ";
-		//$sql .= "limit 1 offset 0 "; 
 
-		// echo $sql;
-		// die;
 		$query 	= $this->db->query($sql);
 		return $query;
 
@@ -166,10 +156,9 @@ class Model_dashboard extends CI_Model
 		// id_name, 
 		// data_meter.metergroupid,
 		// metergroupname
-		// FROM
-		// 	data_meter 
+		// FROM data_meter 
 		// LEFT JOIN metergroups 
-		// 	ON metergroups.metergroupid = data_meter.metergroupid 
+		// ON metergroups.metergroupid = data_meter.metergroupid 
 		// WHERE data_meter.metergroupid in ( select metergroupid from usermetergroups where username = 'superadmin' ) 
 		// order by 
 		// data_meter.id desc limit 12 offset 0;

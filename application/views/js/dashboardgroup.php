@@ -1,3 +1,4 @@
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
 
 		<!-- REQUIRED SCRIPTS -->
 		<!-- jQuery -->
@@ -11,7 +12,7 @@
 		<!-- AdminLTE App -->
 		<script src="<?php echo base_url(); ?>assets/theme/theme01/dist/js/adminlte.js"></script>
 
-		<!-- PAGE PLUGINS -->
+		<!-- PAGE PLUGINS --> 
 
 
 		<!-- start: MAIN JAVASCRIPTS -->
@@ -26,4 +27,5 @@
 		<script src="<?php echo base_url(); ?>assets/vendor/bootstrap-toggle/bootstrap-toggle.min.js"></script>
 		
 		<!-- end: MAIN JAVASCRIPTS -->
+
 		

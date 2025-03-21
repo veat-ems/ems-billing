@@ -1,8 +1,20 @@
-$(function () {
+/* ------------------------------------------------------------------------------
+ *
+ *  # Echarts - candlestick and other charts
+ *
+ *  Candlestick and other chart configurations
+ *
+ *  Version: 1.0
+ *  Latest update: August 1, 2015
+ *
+ * ---------------------------------------------------------------------------- */
 
+$(function () {
+  alert("alert dashboardall js");
   function padDigits(number, digits) {
     return numberWithCommas(number);
   }
+
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -34,23 +46,24 @@ $(function () {
           var val_variable4 = obj.variable4; // reactive
           var val_dt0 = obj.date_time;
 
-          var dt_color = "#f9636b";
+          var dt_color = '#f9636b';
 
-          var now = new Date();
-          var dt_test = new Date();
+					var now = new Date();
+					var dt_test = new Date();
 
-          dt_test.setTime(now.getTime() + 30 * 60 * 1000);
+					dt_test.setTime(now.getTime() + (30 * 60 * 1000));
 
-          var diffMs = now - new Date(val_dt0); // milliseconds between now & dt
-          var diffMins = Math.round(diffMs / 60000); // minutes
 
-          // var dt_str = 'Updated in  '+ diffMins + '  minutes ago..';
+					var diffMs = (now - new Date(val_dt0)); // milliseconds between now & dt
+					var diffMins = Math.round(diffMs / 60000); // minutes
+
+					// var dt_str = 'Updated in  '+ diffMins + '  minutes ago..';
           if (diffMins < 60) {
-            dt_color = "orange";
-          }
-          if (diffMins < 30) {
-            dt_color = "lightgreen";
-          }
+						dt_color = 'orange';
+					}
+					if (diffMins < 30) {
+						dt_color = 'lightgreen';
+					}
 
           var id_variable0 = "id_val_variable0_" + c; // tkh
           var id_variable1 = "id_val_variable1_" + c;
@@ -124,7 +137,7 @@ $(function () {
           if (val_dt0 == null) {
             val_dt0 = "*";
           }
-
+          
           document.getElementById(id_variable0).innerHTML = numberWithCommas(val_variable0); //  tkh
           document.getElementById(id_variable1).innerHTML = numberWithCommas(val_variable1); //  tkh
           document.getElementById(id_variable2).innerHTML = numberWithCommas(val_variable2); //  tkh
@@ -140,16 +153,11 @@ $(function () {
           document.getElementById(id_satuan4).innerHTML = val_satuan4; //    tkh
         }
       },
-
+      complete: function (data) {
+        setTimeout(fetchdata, 60000);
+      },
     });
   }
-
-  const socket = io("http://localhost:3001");
-
-  socket.on("update_data", (data) => {
-    // console.log("Data updated:", data);
-    fetchdata();
-  });
 
   $(document).ready(function () {
     setTimeout(fetchdata, 1000);

@@ -23,9 +23,6 @@ class Dashboardall extends CI_Controller
 	public function index()
 	{
 		$metergroupid = $this->input->post('metergroupid');
-		// if ($metergroupid == "") {
-		// 	redirect(site_url('dashboardall/index/0'));
-		// }
 
 		$sess_data_metergroupid['sess_metergroupid'] = $metergroupid;
 		$this->session->set_userdata($sess_data_metergroupid);
@@ -45,18 +42,11 @@ class Dashboardall extends CI_Controller
 
 		$d['metergroupid'] = $metergroupid;
 		$condition_metergroup['metergroupid'] = $metergroupid;
-		// $d['metergrouprow'] = $this->mcrud->search($condition_metergroup, 'metergroups');
 
-		// tkh // 	function searchall($conditions=NULL,$tablename="", $orderbyfield=NULL, $orderbytype=NULL,$limit=0,$offset=0)
 		$result = $this->mcrud->search($condition_metergroup, 'metergroups'); // tkh get metergroupname
 		$d['metergroupname'] = $result;
 		$result = $this->mcrud->searchall_row($condition_metergroup, 'pg_counter_min_metergroups', 'date_time', 'asc', 1, 0);
 		$d['metergrouprow'] = $result;
-		// var_dump($result);
-		// die;
-		// $d['metergrouprow'] = $result->row();
-		// var_dump($d);
-		// die;
 
 		$val_uri3 = $this->uri->segment(3);
 		if ($val_uri3 == "" or !is_numeric($val_uri3)) {
@@ -72,20 +62,12 @@ class Dashboardall extends CI_Controller
 		$d['meter'] = $this->model_dashboard->tampil()->result();
 		$d['page'] = 'admin';
 
-		//=============================
-
 		$config['base_url'] 	= site_url('dashboardall/index'); //site url
-		//$config['total_rows'] 	= $this->db->count_all('data_meter'); //total row
-		// $config['total_rows'] 	= $this->model_dashboard->count_rows('data_meter', $this->session->userdata('username'), $metergroupid); //total row
-		// All tkh
 		$config['total_rows'] 	= $this->model_dashboard->count_rows('data_meter', $this->session->userdata('username')); //total row
-
 		$config['per_page'] 	= $this->paging_row_perpage;  //show record per halaman
 		$config["uri_segment"] 	= 3;  // uri parameter
 		$choice 				= $config["total_rows"] / $config["per_page"];
 		$config["num_links"] 	= floor(3);
-
-		// Membuat Style pagination untuk BootStrap v4
 		$config['first_link']       = 'First';
 		$config['last_link']        = 'Last';
 		$config['next_link']        = 'Next';
@@ -107,50 +89,27 @@ class Dashboardall extends CI_Controller
 
 		$this->pagination->initialize($config);
 		$d['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-		//panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model. 
-		// $d['data_meter_paging'] = $this->model_dashboard->get_data_meter_paging_list($config["per_page"], $d['page'], $this->session->userdata('username'), $metergroupid)->result();
-		// All tkh
 		$d['data_meter_paging'] = $this->model_dashboard->get_data_meter_paging_list($config["per_page"], $d['page'], $this->session->userdata('username'))->result();
-
 		$d['pagination'] = $this->pagination->create_links();
-		// var_dump($d);
-		// die;
 
-		//=============================
 		$this->template->display('dashboardall', $d);
-	}
+	} 
 
 	public function datameter($val_page = 0)  //  pg_counter_live
 	{
-		// var_dump($val_page);		
-		// die;
 		$metergroupid = $this->session->userdata('sess_metergroupid');
-		//$list = $this->model_dashboard->tampil()->result();
 		$list = $this->model_dashboard->get_data_meter_paging_list($this->paging_row_perpage, $val_page, $this->session->userdata('username'), $metergroupid)->result();
 		$data = array();
 		$no = 0;
 		foreach ($list as $meter) {
 			$no++;
-			// $id_meter    = $meter->id_meter;
 			$id			= $meter->id;
 			$id_counter = $this->model_dashboard->getcounter_id('pg_counter_live', $id);
-			// var_dump($id_counter); // die;			
 			if ($id_counter != null) {
 				$dtcounter = $this->model_dashboard->dt_counter_formatted('pg_counter_live', 'id_counter', $id_counter)->row();
 			} else {
 				$dtcounter = '';
 			}
-
-
-			// if ($meter->id == 'COM2_3'){
-			// 	var_dump($dtcounter);		
-			// 	die;
-			// }
-			// if ($meter->id == 'COM2_1'){
-			// var_dump($dtcounter);		
-			// //die;
-			// }
 
 			$row = array();
 			$row['id_meter'] = $meter->id_meter;
@@ -163,20 +122,6 @@ class Dashboardall extends CI_Controller
 				$row['variable4']  	= null;
 				$row['date_time']  	= null;
 			} else { // tkh
-				// --$reactive_power 	= sqrt(abs(($dtcounter->va * $dtcounter->va) - ($dtcounter->watt * $dtcounter->watt)));
-				// $row['variable0'] 	= $dtcounter->kwh_exp / 1000; 	//col_db kwh_exp	// var val_variable0	= obj.variable0;    // active energy	// tkh 
-				// $row['variable1'] 	= $dtcounter->va2 / 1000;		//col_db va2		// var val_variable1 	= obj.variable1;	// maximum demand
-				// $row['variable2'] 	= $dtcounter->watt / 1000;		//col_db watt		// var val_variable2 	= obj.variable2;	// average demand
-				// $row['variable3'] 	= $dtcounter->va / 1000;		//col_db va			// var val_variable3 	= obj.variable3;	// apparent power
-				// $row['variable4']   = $dtcounter->va3  / 1000;		//col_db va3		// var val_variable4 	= obj.variable4; 	// reactive
-				// $row['date_time']  	= $dtcounter->date_time;		//  pf -- kvah
-
-				//billing
-				//$d['tarif_wbp'] 		= $tarif_wbp;   // col kwh1
-				//$d['tarif_lwbp'] 		= $tarif_lwbp;  // col kwh2
-
-				// variable0 => <td width="35%" class="tdnm">TOTAL</td>
-				// penyesuaian binding baru full variabel
 				if ($dtcounter->kwh == null) {
 					if ($dtcounter->kwh_exp == null) {
 						$row['variable0'] 		= null;
@@ -186,19 +131,6 @@ class Dashboardall extends CI_Controller
 				} else {
 					$row['variable0'] 		= $dtcounter->kwh / 1000;
 				}
-				// variable1 => <td width="35%" class="tdnm">WBP</td>
-				// if($dtcounter->kwh1 == null) {
-				// 	$row['variable1'] 		= null;
-				// } else {
-				// 	$row['variable1'] 		= $dtcounter->kwh1/ 1000;
-
-				// }
-				// // variable2 => <td class="tdnm">LWBP</td>
-				// if($dtcounter->kwh2 == null) {
-				// 	$row['variable2'] 		= null;
-				// } else {
-				// 	$row['variable2'] 		= $dtcounter->kwh2/ 1000;
-				// }
 
 				// format grp
 				if ($dtcounter->v2 == null) {
@@ -241,7 +173,8 @@ class Dashboardall extends CI_Controller
 				} else {
 					$row['date_time'] 		= $dtcounter->date_time;
 				}
-			}		// var_dump($row);
+			}		
+			// var_dump($row);
 
 			$data[] = $row;
 		}
